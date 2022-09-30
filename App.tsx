@@ -1,54 +1,54 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { StatusBar, View } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react'
+import { StatusBar, View } from 'react-native'
 import {
   useFonts,
   Rubik_300Light,
   Rubik_400Regular,
-  Rubik_500Medium
-} from '@expo-google-fonts/rubik';
-import { NavigationContainer } from '@react-navigation/native';
-import * as SplashScreen from 'expo-splash-screen';
-import * as Font from 'expo-font';
+  Rubik_500Medium,
+} from '@expo-google-fonts/rubik'
+import { NavigationContainer } from '@react-navigation/native'
+import * as SplashScreen from 'expo-splash-screen'
+import * as Font from 'expo-font'
 
-import { AppRoutes } from './src/routes/app.routes';
+import { AppRoutes } from './src/routes/app.routes'
 
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState(false);
+  const [appIsReady, setAppIsReady] = useState(false)
 
   useEffect(() => {
     async function prepare() {
       try {
-        await SplashScreen.preventAutoHideAsync();
+        await SplashScreen.preventAutoHideAsync()
         await Font.loadAsync({
           Rubik_300Light,
           Rubik_400Regular,
-          Rubik_500Medium
-        });
+          Rubik_500Medium,
+        })
       } catch (e) {
-        console.warn(e);
+        console.warn(e)
       } finally {
-        setAppIsReady(true);
+        setAppIsReady(true)
       }
     }
 
-    prepare();
+    prepare()
   }, [])
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
-      await SplashScreen.hideAsync();
+      await SplashScreen.hideAsync()
     }
-  }, [appIsReady]);
+  }, [appIsReady])
 
   if (!appIsReady) {
-    return null;
+    return null
   }
 
   return (
     <View
       onLayout={onLayoutRootView}
       style={{
-        flex: 1
+        flex: 1,
       }}
     >
       <NavigationContainer>
@@ -60,5 +60,5 @@ export default function App() {
         <AppRoutes />
       </NavigationContainer>
     </View>
-  );
+  )
 }

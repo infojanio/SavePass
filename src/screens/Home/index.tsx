@@ -26,13 +26,13 @@ export function Home() {
     const dataKey = '@savepass:logins'
     // Get asyncStorage data, use setSearchListData and setData
 
-    const response = await AsyncStorage.getItem(dataKey) //pega o dataKey do AsyncStorage
+    const data = await AsyncStorage.getItem(dataKey) //pega o dataKey do AsyncStorage
 
-    if (response) {
-      const parsedData = JSON.parse(response) //transforma strings em JSON
+    if (data) {
+      const parsedData = JSON.parse(data) //transforma strings em JSON
 
-      setSearchListData(parsedData) //quando filtra na busca
       setData(parsedData) //quando apaga a busca
+      setSearchListData(parsedData) //quando filtra na busca
     }
   }
 
@@ -59,11 +59,9 @@ export function Home() {
     setSearchText(text)
   }
 
-  /*
-    useEffect(() => {
-      AsyncStorage.removeItem('@savepass:logins')
-    }, [])
-    */
+  useEffect(() => {
+    AsyncStorage.removeItem('@savepass:logins')
+  }, [])
 
   useFocusEffect(
     useCallback(() => {
